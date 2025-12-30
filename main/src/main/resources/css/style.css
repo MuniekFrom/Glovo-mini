@@ -1,0 +1,65 @@
+.round-button {
+    -fx-background-color: #B9A7F2;
+    -fx-text-fill: white;
+
+    -fx-font-size: 20px;
+    -fx-font-weight: 800;
+
+    -fx-background-radius: 40;
+    -fx-padding: 18 56 18 56;
+
+
+    -fx-min-width: 260px;
+
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.18), 12, 0.15, 0, 4);
+}
+
+
+.round-button:hover {
+    -fx-background-color: #A895EB;
+}
+
+.round-button:pressed {
+    -fx-background-color: #9A85E0;
+}
+
+
+
+
+/* WYJDŹ */
+
+.round-button-exit {
+    -fx-min-width: 120px; 
+    -fx-padding: 10 20 10 20; 
+    -fx-background-color: #B9A7F2;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: 800;
+    -fx-background-radius: 20;
+}
+
+.round-button-exit:hover {
+    -fx-background-color: #D8D0F0;
+}
+
+.round-button-exit:pressed {
+    -fx-background-color: #C9BEEA;
+}
+
+.pick-button {
+     -fx-background-color: #B9A7F2;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: 800;
+    -fx-background-radius: 20;
+    -fx-padding: 10 25 10 25; 
+    -fx-min-width: 173px;
+}
+
+.pick-button:hover {
+    -fx-background-color: #A895EB;
+}
+
+.pick-button:pressed {
+    -fx-background-color: #9A85E0;
+}
