@@ -20,21 +20,11 @@
          </image>
       </ImageView>
         
-      <MenuBar layoutY="777.0" prefHeight="43.0" prefWidth="506.0" style="-fx-background-color: #C7B9E2;">
+      <MenuBar layoutY="779.0" prefHeight="43.0" prefWidth="582.0" style="-fx-background-color: #C7B9E2;">
     <menus>
-        <Menu mnemonicParsing="false" text="Wróć">
+        <Menu mnemonicParsing="false" text="Powrót">
             <items>
                 <MenuItem onAction="#wrocDoPoprzedniegoOkna" text="← Wróć" />
-            </items>
-        </Menu>
-    </menus>
-</MenuBar>
-
-<MenuBar layoutX="504.0" layoutY="777.0" prefHeight="43.0" prefWidth="76.0" style="-fx-background-color: #C7B9E2;">
-    <menus>
-        <Menu mnemonicParsing="false" text="Zamów">
-            <items>
-                <MenuItem mnemonicParsing="false" onAction="#zamowAkcja" text="Close" />
             </items>
         </Menu>
     </menus>
@@ -64,8 +54,7 @@
          </image>
       </ImageView>
       <Button fx:id="Zakupy" layoutX="80.0" layoutY="283.0" mnemonicParsing="false" prefWidth="100" styleClass="pick-button" text="ZAKUPY" />
-      <Button fx:id="Restauracje" layoutX="344.0" layoutY="283.0" mnemonicParsing="false" prefWidth="100"
-        styleClass="pick-button" text="RESTAURACJE" onAction="#przejdzDoRestauracje"/>
+      <Button fx:id="Restauracje" layoutX="344.0" layoutY="283.0" mnemonicParsing="false" onAction="#przejdzDoRestauracje" prefWidth="100" styleClass="pick-button" text="RESTAURACJE" />
 
    </children>
 </AnchorPane>

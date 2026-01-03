@@ -9,36 +9,64 @@ import javafx.stage.Stage;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
+
+
 import java.io.IOException;
 
 public class RestauracjeController {
+    
+    
+    
+        @FXML
+    private Button Kebab;
 
-    public void wrocDoPoprzedniegoOkna(ActionEvent event) {
+    @FXML
+    private Button Makaron;
+
+    @FXML
+    private Button Pizza;
+
+    @FXML
+    private Button Sushi;
+
+   public void wrocDoPoprzedniegoOkna(ActionEvent event) {
     try {
-        Parent root = FXMLLoader.load(getClass().getResource("/com/example/main/GlovoMiniApp.fxml"));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.setResizable(false);
-        stage.show();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/main/MainController.fxml"));
+        Parent root = loader.load();
+
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
+
+        Stage stage = (Stage) ((javafx.scene.control.MenuItem) event.getSource())
+                .getParentPopup().getOwnerWindow();
+
+        stage.setScene(scene);
+
     } catch (IOException e) {
         e.printStackTrace();
-        }
+    }
 }
+   
+   public void przejdzDoSushi(ActionEvent event){
+         try {
+            
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/main/Sushi.fxml"));
+            Parent root = loader.load();
 
-    public void zamowAkcja(ActionEvent event) {
-        System.out.println("Kliknięto");
-    }
-    
-    @FXML
-    private Button Zakupy;
-    @FXML
-    private Button Restauracje;
+            
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setResizable(false);
+            stage.show();
 
-    @FXML
-    public void initialize() {
-        Zakupy.getStyleClass().add("pick-button");
-        Restauracje.getStyleClass().add("pick-button");
-    }
+
+        } catch (IOException e) {
+          
+            e.printStackTrace();
+        }
+   }
+
+
     
 }
 
