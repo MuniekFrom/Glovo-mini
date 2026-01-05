@@ -47,24 +47,22 @@ public class RestauracjeController {
     }
 }
    
-   public void przejdzDoSushi(ActionEvent event){
-         try {
-            
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/main/Sushi.fxml"));
-            Parent root = loader.load();
+    public void przejdzDoSushi(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/com/example/main/Sushi.fxml"));
 
-            
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
+
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
+            stage.setScene(scene);
             stage.setResizable(false);
             stage.show();
 
-
         } catch (IOException e) {
-          
-            e.printStackTrace();
+         e.printStackTrace();
         }
-   }
+    }
 
 
     
