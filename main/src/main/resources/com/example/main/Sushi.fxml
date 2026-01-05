@@ -90,7 +90,7 @@
          </image>
       </ImageView>
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="5.0" layoutY="655.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="600.0" />
-      <Text layoutX="331.0" layoutY="734.0" strokeType="OUTSIDE" strokeWidth="0.0" text="🛒 Razem: ">
+      <Text layoutX="312.0" layoutY="767.0" strokeType="OUTSIDE" strokeWidth="0.0" text="🛒 Razem: ">
          <font>
             <Font size="36.0" />
          </font>
@@ -120,7 +120,7 @@
             <Image url="@../../../photos/temaki.png" />
          </image>
       </ImageView>
-      <Text layoutX="340.0" layoutY="686.0" strokeType="OUTSIDE" strokeWidth="0.0" text="🚚 Dostawa  +10 zł">
+      <Text layoutX="312.0" layoutY="716.0" strokeType="OUTSIDE" strokeWidth="0.0" text="🚚 Dostawa  +10 zł">
          <font>
             <Font size="18.0" />
          </font>
@@ -162,18 +162,35 @@
       </Text>
       <Text fx:id="iloscTemaki" layoutX="387.0" layoutY="580.0" strokeType="OUTSIDE" strokeWidth="0.0">
          <font>
-            <Font size="24.0" />
+            <Font size="18.0" />
          </font>
       </Text>
-      <Text fx:id="cenaKoncowaSushi" layoutX="501.0" layoutY="736.0" strokeType="OUTSIDE" strokeWidth="0.0">
+      <Text fx:id="cenaKoncowaSushi" layoutX="480.0" layoutY="769.0" strokeType="OUTSIDE" strokeWidth="0.0">
          <font>
             <Font size="36.0" />
          </font>
       </Text>
-      <Button fx:id="usunFutomaki" layoutX="375.0" layoutY="158.0" mnemonicParsing="false" onAction="#usunFutomaki" prefHeight="27.0" prefWidth="25.0" text="-" />
-      <Button fx:id="usunNigiri" layoutX="375.0" layoutY="263.0" mnemonicParsing="false" onAction="#usunNigiri" prefHeight="27.0" prefWidth="25.0" text="-" />
-      <Button fx:id="usunCalifornia" layoutX="375.0" layoutY="367.0" mnemonicParsing="false" onAction="#usunCalifornia" prefHeight="27.0" prefWidth="25.0" text="-" />
-      <Button fx:id="usunPhiladelphia" layoutX="375.0" layoutY="486.0" mnemonicParsing="false" onAction="#usunPhiladelphia" prefHeight="27.0" prefWidth="25.0" text="-" />
-      <Button fx:id="usunTemaki" layoutX="375.0" layoutY="603.0" mnemonicParsing="false" onAction="#usunTemaki" prefHeight="27.0" prefWidth="25.0" text="-" />
+      <Button fx:id="usunFutomaki" layoutX="375.0" layoutY="158.0" mnemonicParsing="false" onAction="#usunFutomaki" prefHeight="27.0" prefWidth="25.0" text="-" AnchorPane.rightAnchor="197.0" />
+      <Button fx:id="usunNigiri" layoutX="375.0" layoutY="263.0" mnemonicParsing="false" onAction="#usunNigiri" prefHeight="27.0" prefWidth="25.0" text="-" AnchorPane.rightAnchor="197.0" />
+      <Button fx:id="usunCalifornia" layoutX="375.0" layoutY="367.0" mnemonicParsing="false" onAction="#usunCalifornia" prefHeight="27.0" prefWidth="25.0" text="-" AnchorPane.rightAnchor="197.0" />
+      <Button fx:id="usunPhiladelphia" layoutX="375.0" layoutY="486.0" mnemonicParsing="false" onAction="#usunPhiladelphia" prefHeight="27.0" prefWidth="25.0" text="-" AnchorPane.rightAnchor="197.0" />
+      <Button fx:id="usunTemaki" layoutX="375.0" layoutY="603.0" mnemonicParsing="false" onAction="#usunTemaki" prefHeight="27.0" prefWidth="25.0" text="-" AnchorPane.rightAnchor="197.0" />
+      <Button fx:id="powrotPrzycisk" layoutX="28.0" layoutY="19.0" mnemonicParsing="false" onAction="#powrotDoWyboruRestauracji" prefHeight="25.0" prefWidth="76.0" styleClass="powrotButton" text="Powrót" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="13.0" />
+      <Text layoutX="312.0" layoutY="686.0" strokeType="OUTSIDE" strokeWidth="0.0" text="🍣 Jedzenie: ">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="jedzenieTextCena" layoutX="423.0" layoutY="686.0" strokeType="OUTSIDE" strokeWidth="0.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Button fx:id="zamowPrzycisk" layoutX="443.0" layoutY="782.0" mnemonicParsing="false" onAction="#zamowienieJedzenia" prefHeight="25.0" prefWidth="140.0" styleClass="zamowButton" text="Zamów" AnchorPane.bottomAnchor="7.0" AnchorPane.rightAnchor="9.0" />
+      <Text fx:id="zamowienieMinimumKwotaText" fill="RED" layoutX="175.0" layoutY="800.0" strokeType="OUTSIDE" strokeWidth="0.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>
