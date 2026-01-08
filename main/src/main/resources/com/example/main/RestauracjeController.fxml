@@ -58,7 +58,7 @@
          </image>
       </ImageView>
       <Button fx:id="Sushi" layoutX="118.0" layoutY="398.0" mnemonicParsing="false" onAction="#przejdzDoSushi" text="Sushi" />
-      <Button fx:id="Makaron" layoutX="382.0" layoutY="398.0" mnemonicParsing="false" text="Makaron" />
+      <Button fx:id="Makaron" layoutX="382.0" layoutY="398.0" mnemonicParsing="false" onAction="#przejdzDoMakaron" text="Makaron" />
       <Button fx:id="Kebab" layoutX="118.0" layoutY="692.0" mnemonicParsing="false" text="Kebab" />
       <Button fx:id="Pizza" layoutX="392.0" layoutY="692.0" mnemonicParsing="false" text="Pizza" />
    </children>

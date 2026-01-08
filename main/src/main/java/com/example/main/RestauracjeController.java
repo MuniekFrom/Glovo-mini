@@ -63,6 +63,23 @@ public class RestauracjeController {
          e.printStackTrace();
         }
     }
+    
+    public void przejdzDoMakaron(ActionEvent event) {
+      try {
+            Parent root = FXMLLoader.load(getClass().getResource("/com/example/main/Makaron.fxml"));
+
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+    }
 
 
     
