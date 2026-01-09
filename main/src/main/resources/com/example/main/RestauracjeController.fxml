@@ -57,9 +57,9 @@
             <Image url="@../../../photos/pizza.png" />
          </image>
       </ImageView>
-      <Button fx:id="Sushi" layoutX="118.0" layoutY="398.0" mnemonicParsing="false" onAction="#przejdzDoSushi" text="Sushi" />
-      <Button fx:id="Makaron" layoutX="382.0" layoutY="398.0" mnemonicParsing="false" onAction="#przejdzDoMakaron" text="Makaron" />
-      <Button fx:id="Kebab" layoutX="118.0" layoutY="692.0" mnemonicParsing="false" text="Kebab" />
-      <Button fx:id="Pizza" layoutX="392.0" layoutY="692.0" mnemonicParsing="false" text="Pizza" />
+      <Button fx:id="Sushi" layoutX="118.0" layoutY="398.0" mnemonicParsing="false" onAction="#przejdzDoSushi" styleClass="sushiButton" text="Sushi" AnchorPane.leftAnchor="105.0" />
+      <Button fx:id="Makaron" layoutX="382.0" layoutY="398.0" mnemonicParsing="false" onAction="#przejdzDoMakaron" styleClass="makaronButton" text="Makaron" AnchorPane.leftAnchor="366.0" />
+      <Button fx:id="Kebab" layoutX="118.0" layoutY="692.0" mnemonicParsing="false" onAction="#przejdzDoKebab" styleClass="kebabButton" text="Kebab" AnchorPane.leftAnchor="105.0" />
+      <Button fx:id="Pizza" layoutX="392.0" layoutY="692.0" mnemonicParsing="false" onAction="#przejdzDoPizza" styleClass="pizzaButton" text="Pizza" AnchorPane.leftAnchor="380.0" />
    </children>
 </AnchorPane>
