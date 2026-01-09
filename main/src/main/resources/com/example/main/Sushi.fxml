@@ -12,6 +12,11 @@
 <AnchorPane id="AnchorPane" prefHeight="820.0" prefWidth="580.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.main.SushiController">
    <children>
       <Rectangle fill="#9C81DB" height="63.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="600.0" />
+      <ImageView fitHeight="603.0" fitWidth="600.0" layoutY="58.0">
+         <image>
+            <Image url="@../../../photos/glovo_mini_kopia.png" />
+         </image>
+      </ImageView>
       <Text layoutX="461.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="KONTO" />
       <Text layoutX="534.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="KOSZYK" />
       <Text layoutX="215.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nigiri">

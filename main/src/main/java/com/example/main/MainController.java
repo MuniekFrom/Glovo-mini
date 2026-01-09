@@ -47,21 +47,21 @@ public void wrocDoPoprzedniegoOkna(ActionEvent event) {
     @FXML
 private void przejdzDoRestauracje(ActionEvent event) {
     try {
-            
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/main/RestauracjeController.fxml"));
-            Parent root = loader.load();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/main/RestauracjeController.fxml"));
+        Parent root = loader.load();
 
-            
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.setResizable(false);
-            stage.show();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
 
-        } catch (IOException e) {
-            System.err.println("BŁĄD przy kliknięciu ZACZNIJ");
-            e.printStackTrace();
-        }
+        stage.setScene(scene);         
+        stage.setResizable(false);
+        stage.show();
+
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
 }
 
 

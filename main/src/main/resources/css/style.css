@@ -27,9 +27,9 @@
 
 /* Powrót button */
 .powrotButton {
-    -fx-min-height: 34;
-    -fx-pref-height: 34;
-    -fx-max-height: 34;
+    -fx-min-height: 36;
+    -fx-pref-height: 36;
+    -fx-max-height: 36;
     -fx-min-width: 90;
     -fx-pref-width: 90;
     -fx-max-width: 90;
@@ -40,7 +40,9 @@
     -fx-font-size: 13px;
     -fx-font-weight: 700;
 
-    -fx-padding:  8;
+    -fx-background-insets: 0;
+    -fx-border-insets: 0;
+    -fx-padding: 8 18 8 18;
     -fx-background-radius: 999;
     -fx-border-radius: 999;
     -fx-border-width: 2;
@@ -67,6 +69,10 @@
 }
 
 .powrotButton:focused {
+    -fx-background-insets: 0;
+    -fx-border-insets: 0;
+    -fx-faint-focus-color: transparent;
+    -fx-focus-color: transparent;
     -fx-border-color: #6d5bd0;
     -fx-border-width: 2.5;
 }
@@ -154,6 +160,69 @@
 .zamowButton:focused {
     -fx-border-color: rgba(255,255,255,0.8);
     -fx-border-width: 1.5;
+}
+
+/*przyciski z restaruracje controller */
+
+.sushiButton,
+.makaronButton,
+.kebabButton,
+.pizzaButton {
+    -fx-background-color: linear-gradient(to bottom, #ffffff, #f3f3f3);
+    -fx-text-fill: #333333;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+
+    -fx-padding: 8 18 8 18;
+    -fx-background-radius: 14;
+    -fx-border-radius: 14;
+
+    -fx-border-color: #d0d0d0;
+    -fx-border-width: 1;
+
+    -fx-cursor: hand;
+
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8, 0.2, 0, 3);
+
+    -fx-transition: all 0.2s ease-in-out;
+}
+
+
+.sushiButton:hover,
+.makaronButton:hover,
+.kebabButton:hover,
+.pizzaButton:hover {
+    -fx-background-color: linear-gradient(to bottom, #fff7e6, #ffe0b2);
+    -fx-border-color: #ff9800;
+    -fx-effect: dropshadow(gaussian, rgba(255,152,0,0.4), 12, 0.3, 0, 4);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+.sushiButton:pressed,
+.makaronButton:pressed,
+.kebabButton:pressed,
+.pizzaButton:pressed {
+    -fx-background-color: linear-gradient(to bottom, #ffd180, #ffb74d);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 6, 0.2, 0, 2);
+    -fx-scale-x: 0.97;
+    -fx-scale-y: 0.97;
+}
+
+.sushiButton:hover {
+    -fx-border-color: #4caf50;
+}
+
+.makaronButton:hover {
+    -fx-border-color: #ff7043;
+}
+
+.kebabButton:hover {
+    -fx-border-color: #8d6e63;
+}
+
+.pizzaButton:hover {
+    -fx-border-color: #e53935;
 }
 
 

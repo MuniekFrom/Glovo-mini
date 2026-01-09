@@ -81,7 +81,39 @@ public class RestauracjeController {
         }
     }
 
+    public void przejdzDoPizza(ActionEvent event) {
+      try {
+            Parent root = FXMLLoader.load(getClass().getResource("/com/example/main/Pizza.fxml"));
 
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+    }
+    
+    public void przejdzDoKebab(ActionEvent event) {
+      try {
+            Parent root = FXMLLoader.load(getClass().getResource("/com/example/main/Kebab.fxml"));
+
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+    }
     
 }
 

@@ -20,28 +20,36 @@ import java.nio.file.Files;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import javafx.scene.control.ComboBox;
 
-public class MakaronController {
+public class KebabController {
 
-    @FXML private Text iloscSpaghetti, iloscCarbonara, iloscPenne, iloscPennePesto;
-    @FXML private Text cenaKoncowaMakaron, jedzenieTextCena, zamowienieMinimumKwotaText;
+    @FXML private Text iloscRollo, iloscPita, iloscBox, iloscWrap;
+    @FXML private Text cenaKoncowaPizza, jedzenieTextCena, zamowienieMinimumKwotaText;
 
-    @FXML private CheckBox checkBoxSer, checkBoxOliwa;
+    @FXML private CheckBox sosLagodny, sosMieszany, sosOstry;
 
-    @FXML private Button usunSpaghetti, usunCarbonara, usunPenne, usunPennePesto;
+    @FXML private Button usunRollo, usunPita, usunBox, usunWrap;
     @FXML private Button powrotPrzycisk;
 
-    private int spaghetti = 0, carbonara = 0, penne = 0, pennePesto = 0;
+    @FXML private ComboBox<String> rozmiarRollo, rozmiarPita, rozmiarBox, rozmiarWrap;
+    @FXML private ComboBox<String> miesoRollo, miesoPita, miesoBox, miesoWrap;
 
-    private static final int CENA_SPAGHETTI = 32;
-    private static final int CENA_CARBONARA = 34;
-    private static final int CENA_PENNE = 30;
-    private static final int CENA_PENNE_PESTO = 33;
+    private int rollo = 0, pita = 0, box = 0, wrap = 0;
 
-    private static final int SER = 4;
-    private static final int OLIWA = 3;
+    private static final int CENA_ROLLO = 32;
+    private static final int CENA_PITA = 34;
+    private static final int CENA_BOX = 35;
+    private static final int CENA_WRAP = 33;
+
+    private static final int DOPLATA_SREDNI = 8;
+    private static final int DOPLATA_DUZY = 16;
+
+    private static final int SOS_LAGODNY = 4;
+    private static final int SOS_MIESZANY = 5;
+    private static final int SOS_OSTRY = 6;
+
     private static final int DOSTAWA = 10;
-    
     private static final int MIN_ZAMOWIENIA = 30;
 
     private int sumaJedzenia = 0;
@@ -49,85 +57,140 @@ public class MakaronController {
 
     @FXML
     private void initialize() {
+        initRozmiar(rozmiarRollo);
+        initRozmiar(rozmiarPita);
+        initRozmiar(rozmiarBox);
+        initRozmiar(rozmiarWrap);
+
+        initMieso(miesoRollo);
+        initMieso(miesoPita);
+        initMieso(miesoBox);
+        initMieso(miesoWrap);
+
         odswiezWidok();
     }
 
+    private void initRozmiar(ComboBox<String> cb) {
+        cb.getItems().addAll("Mały", "Średni", "Duży");
+        cb.setValue("Średni");
+        cb.setOnAction(e -> odswiezWidok());
+    }
 
-    @FXML private void plusSpaghetti(ActionEvent e) { spaghetti++; odswiezWidok(); }
-    @FXML private void plusCarbonara(ActionEvent e) { carbonara++; odswiezWidok(); }
-    @FXML private void plusPenne(ActionEvent e) { penne++; odswiezWidok(); }
-    @FXML private void plusPennePesto(ActionEvent e) { pennePesto++; odswiezWidok(); }
+    private void initMieso(ComboBox<String> cb) {
+        cb.getItems().addAll("Baranina", "Kurczak", "Mieszane");
+        cb.setValue("Baranina");
+        cb.setOnAction(e -> odswiezWidok());
+    }
 
+    private int doplata(ComboBox<String> cb) {
+        if (cb.getValue() == null) return 0;
+        return switch (cb.getValue()) {
+            case "Mały" -> 0;
+            case "Średni" -> DOPLATA_SREDNI;
+            case "Duży" -> DOPLATA_DUZY;
+            default -> 0;
+        };
+    }
 
-    @FXML private void usunSpaghetti(ActionEvent e) { if (spaghetti > 0) spaghetti--; odswiezWidok(); }
-    @FXML private void usunCarbonara(ActionEvent e) { if (carbonara > 0) carbonara--; odswiezWidok(); }
-    @FXML private void usunPenne(ActionEvent e) { if (penne > 0) penne--; odswiezWidok(); }
-    @FXML private void usunPennePesto(ActionEvent e) { if (pennePesto > 0) pennePesto--; odswiezWidok(); }
+    private int doplataMieso(ComboBox<String> cb, int cenaPodstawowa) {
+        if (cb.getValue() == null) return 0;
+        return switch (cb.getValue()) {
+            case "Baranina" -> 0;
+            case "Kurczak" -> 0;
+            case "Mieszane" -> 3;
+            default -> 0;
+        };
+    }
 
+    // ➕
+    @FXML private void plusRollo(ActionEvent e){ rollo++; odswiezWidok(); }
+    @FXML private void plusPita(ActionEvent e){ pita++; odswiezWidok(); }
+    @FXML private void plusBox(ActionEvent e){ box++; odswiezWidok(); }
+    @FXML private void plusWrap(ActionEvent e){ wrap++; odswiezWidok(); }
 
-    @FXML private void dodatkiZmiana(ActionEvent e) { odswiezWidok(); }
+    // ➖
+    @FXML private void usunRollo(ActionEvent e){ if(rollo > 0) rollo--; odswiezWidok(); }
+    @FXML private void usunPita(ActionEvent e){ if(pita > 0) pita--; odswiezWidok(); }
+    @FXML private void usunBox(ActionEvent e){ if(box > 0) box--; odswiezWidok(); }
+    @FXML private void usunWrap(ActionEvent e){ if(wrap > 0) wrap--; odswiezWidok(); }
 
     @FXML
-    public void powrotDoWyboruRestauracji(ActionEvent event) {
-        try {
-            Parent root = FXMLLoader.load(
-                    getClass().getResource("/com/example/main/RestauracjeController.fxml")
-            );
+    private void dodatkiZmiana(ActionEvent e) {
+        odswiezWidok();
+    }
 
-            Scene scene = new Scene(root);
-            scene.getStylesheets().add(
-                    getClass().getResource("/css/style.css").toExternalForm()
-            );
+    private void odswiezWidok() {
+        iloscRollo.setText(String.valueOf(rollo));
+        iloscPita.setText(String.valueOf(pita));
+        iloscBox.setText(String.valueOf(box));
+        iloscWrap.setText(String.valueOf(wrap));
 
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(scene);
-            stage.setResizable(false);
-            stage.show();
+        usunRollo.setVisible(rollo > 0);
+        usunPita.setVisible(pita > 0);
+        usunBox.setVisible(box > 0);
+        usunWrap.setVisible(wrap > 0);
 
-        } catch (IOException e) {
-         e.printStackTrace();
+        int suma =
+            rollo * (CENA_ROLLO + doplata(rozmiarRollo) + doplataMieso(miesoRollo, CENA_ROLLO)) +
+            pita * (CENA_PITA + doplata(rozmiarPita) + doplataMieso(miesoPita, CENA_PITA)) +
+            box * (CENA_BOX + doplata(rozmiarBox) + doplataMieso(miesoBox, CENA_BOX)) +
+            wrap * (CENA_WRAP + doplata(rozmiarWrap) + doplataMieso(miesoWrap, CENA_WRAP));
+
+        boolean cosWKoszyku = suma > 0;
+
+        // Sosy aktywne tylko jeśli coś w koszyku
+        sosLagodny.setDisable(!cosWKoszyku);
+        sosMieszany.setDisable(!cosWKoszyku);
+        sosOstry.setDisable(!cosWKoszyku);
+
+        if (!cosWKoszyku) {
+            sosLagodny.setSelected(false);
+            sosMieszany.setSelected(false);
+            sosOstry.setSelected(false);
         }
+
+        int dodatki = 0;
+        if (sosLagodny.isSelected()) dodatki += SOS_LAGODNY;
+        if (sosMieszany.isSelected()) dodatki += SOS_MIESZANY;
+        if (sosOstry.isSelected()) dodatki += SOS_OSTRY;
+
+        int dostawa = cosWKoszyku ? DOSTAWA : 0;
+
+        sumaJedzenia = suma + dodatki;
+        razemDoZaplaty = sumaJedzenia + dostawa;
+
+        jedzenieTextCena.setText(sumaJedzenia + " zł");
+        cenaKoncowaPizza.setText(razemDoZaplaty + " zł");
     }
 
     private String zbudujRachunek(LocalDateTime data) {
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-        int suma = spaghetti * CENA_SPAGHETTI
-                + carbonara * CENA_CARBONARA
-                + penne * CENA_PENNE
-                + pennePesto * CENA_PENNE_PESTO;
-
-        int dodatki = 0;
-        StringBuilder dodatkiLista = new StringBuilder();
-
-        if (checkBoxSer.isSelected()) { dodatki += SER; dodatkiLista.append("Ser +").append(SER).append(" zł\n"); }
-        if (checkBoxOliwa.isSelected()) { dodatki += OLIWA; dodatkiLista.append("Oliwa +").append(OLIWA).append(" zł\n"); }
-
-        int jedzenie = suma + dodatki;
-        int dostawa = (jedzenie > 0) ? DOSTAWA : 0;
-        int razem = jedzenie + dostawa;
-
         StringBuilder sb = new StringBuilder();
-        sb.append("========== RACHUNEK - MAKARON MINI ==========\n");
+        sb.append("========== RACHUNEK - KEBAB MINI ==========\n");
         sb.append("Data zamówienia: ").append(data.format(fmt)).append("\n");
         sb.append("------------------------------------------\n");
-        sb.append(String.format("%-15s %5s %8s %10s\n", "Produkt", "Ilość", "Cena", "Wartość"));
+
+        if (rollo > 0)
+            sb.append("Rollo x").append(rollo)
+              .append(" (").append(rozmiarRollo.getValue()).append(", ").append(miesoRollo.getValue()).append(")\n");
+
+        if (pita > 0)
+            sb.append("Pita x").append(pita)
+              .append(" (").append(rozmiarPita.getValue()).append(", ").append(miesoPita.getValue()).append(")\n");
+
+        if (box > 0)
+            sb.append("Box x").append(box)
+              .append(" (").append(rozmiarBox.getValue()).append(", ").append(miesoBox.getValue()).append(")\n");
+
+        if (wrap > 0)
+            sb.append("Wrap x").append(wrap)
+              .append(" (").append(rozmiarWrap.getValue()).append(", ").append(miesoWrap.getValue()).append(")\n");
+
         sb.append("------------------------------------------\n");
-
-        if (spaghetti > 0) sb.append(String.format("%-15s %5d %8d %10d\n", "Spaghetti", spaghetti, CENA_SPAGHETTI, spaghetti * CENA_SPAGHETTI));
-        if (carbonara > 0) sb.append(String.format("%-15s %5d %8d %10d\n", "Carbonara", carbonara, CENA_CARBONARA, carbonara * CENA_CARBONARA));
-        if (penne > 0) sb.append(String.format("%-15s %5d %8d %10d\n", "Penne", penne, CENA_PENNE, penne * CENA_PENNE));
-        if (pennePesto > 0) sb.append(String.format("%-15s %5d %8d %10d\n", "Penne Pesto", pennePesto, CENA_PENNE_PESTO, pennePesto * CENA_PENNE_PESTO));
-
-        sb.append("------------------------------------------\n");
-        if (dodatki > 0) {
-            sb.append("Dodatki:\n").append(dodatkiLista);
-            sb.append("------------------------------------------\n");
-        }
-
-        sb.append(String.format("Jedzenie: %d zł\n", jedzenie));
-        sb.append(String.format("Dostawa:  %d zł\n", dostawa));
-        sb.append(String.format("RAZEM:    %d zł\n", razem));
+        sb.append("Jedzenie: ").append(sumaJedzenia).append(" zł\n");
+        sb.append("Dostawa:  ").append(DOSTAWA).append(" zł\n");
+        sb.append("RAZEM:    ").append(razemDoZaplaty).append(" zł\n");
         sb.append("==========================================\n");
 
         return sb.toString();
@@ -159,7 +222,6 @@ public class MakaronController {
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         File file = fc.showSaveDialog(stage);
-        
         if (file == null) return;
 
         try {
@@ -180,53 +242,34 @@ public class MakaronController {
         }
     }
 
-
     private void wyczyscKoszyk() {
-        spaghetti = 0; 
-        carbonara = 0; 
-        penne = 0; 
-        pennePesto = 0;
-        checkBoxSer.setSelected(false);
-        checkBoxOliwa.setSelected(false);
+        rollo = pita = box = wrap = 0;
+        sosLagodny.setSelected(false);
+        sosMieszany.setSelected(false);
+        sosOstry.setSelected(false);
         zamowienieMinimumKwotaText.setText("");
         odswiezWidok();
     }
-    
-    private void odswiezWidok() {
-        iloscSpaghetti.setText(String.valueOf(spaghetti));
-        iloscCarbonara.setText(String.valueOf(carbonara));
-        iloscPenne.setText(String.valueOf(penne));
-        iloscPennePesto.setText(String.valueOf(pennePesto));
 
-        usunSpaghetti.setVisible(spaghetti > 0);
-        usunCarbonara.setVisible(carbonara > 0);
-        usunPenne.setVisible(penne > 0);
-        usunPennePesto.setVisible(pennePesto > 0);
+    @FXML
+    public void powrotDoWyboruRestauracji(ActionEvent event) throws IOException {
+         try {
+            Parent root = FXMLLoader.load(
+                    getClass().getResource("/com/example/main/RestauracjeController.fxml")
+            );
 
-        int suma = spaghetti * CENA_SPAGHETTI
-                + carbonara * CENA_CARBONARA
-                + penne * CENA_PENNE
-                + pennePesto * CENA_PENNE_PESTO;
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(
+                    getClass().getResource("/css/style.css").toExternalForm()
+            );
 
-        boolean cosWKoszyku = suma > 0;
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
 
-        checkBoxSer.setDisable(!cosWKoszyku);
-        checkBoxOliwa.setDisable(!cosWKoszyku);
-        if (!cosWKoszyku) {
-            checkBoxSer.setSelected(false);
-            checkBoxOliwa.setSelected(false);
+        } catch (IOException e) {
+         e.printStackTrace();
         }
-
-        int dodatki = 0;
-        if (checkBoxSer.isSelected()) dodatki += SER;
-        if (checkBoxOliwa.isSelected()) dodatki += OLIWA;
-
-        int dostawa = cosWKoszyku ? DOSTAWA : 0;
-        
-        sumaJedzenia = suma + dodatki;
-        razemDoZaplaty = sumaJedzenia + dostawa;
-
-        jedzenieTextCena.setText(sumaJedzenia + " zł");
-        cenaKoncowaMakaron.setText(razemDoZaplaty + " zł");
     }
 }
