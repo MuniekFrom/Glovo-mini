@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import java.io.IOException;
+import javafx.scene.input.MouseEvent;
 
 
 public class MainController {
@@ -25,50 +26,72 @@ public class MainController {
         Restauracje.getStyleClass().add("pick-button");
     }
   
-public void wrocDoPoprzedniegoOkna(ActionEvent event) {
-    try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/main/GlovoMiniApp.fxml"));
-        Parent root = loader.load();
-
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
-
-        Stage stage = (Stage) ((javafx.scene.control.MenuItem) event.getSource())
-                .getParentPopup().getOwnerWindow();
-
-        stage.setScene(scene);
-
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-}
-
 
     @FXML
-private void przejdzDoRestauracje(ActionEvent event) {
-    try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/main/RestauracjeController.fxml"));
-        Parent root = loader.load();
+    private void przejdzDoRestauracje(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/main/RestauracjeController.fxml"));
+            Parent root = loader.load();
 
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
 
-        stage.setScene(scene);         
-        stage.setResizable(false);
-        stage.show();
+            stage.setScene(scene);         
+            stage.setResizable(false);
+            stage.show();
 
-    } catch (IOException e) {
-        e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-}
-
-
-
-
-
-
     
+    @FXML
+    private void przejdzDoSklepow(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/main/Sklepy.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
+
+            stage.setScene(scene);         
+            stage.setResizable(false);
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void goToMain(MouseEvent event) {
+        try {
+            Parent root = FXMLLoader.load(
+                    getClass().getResource("/com/example/main/MainController.fxml")
+            );
+
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(
+                    getClass().getResource("/css/style.css").toExternalForm()
+            );
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+
 }
 

@@ -226,3 +226,47 @@
 }
 
 
+
+.wejdzDoSklepuButton {
+    -fx-background-color: linear-gradient(to bottom right, #6FD08C, #4CB963);
+    -fx-text-fill: white;
+
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+
+    -fx-padding: 10 26 10 26;
+    -fx-background-radius: 25;
+
+    -fx-cursor: hand;
+
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.18), 10, 0.2, 0, 4);
+}
+
+.wejdzDoSklepuButton:hover {
+    -fx-background-color: linear-gradient(to bottom right, #7BE0A1, #5FD47A);
+}
+
+.wejdzDoSklepuButton:pressed {
+    -fx-background-color: linear-gradient(to bottom right, #4CB963, #3FA955);
+    -fx-translate-y: 2;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 6, 0.2, 0, 2);
+}
+
+.tloClass {
+    -fx-background-image: url("/photos/tlo.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+    -fx-background-size: 690px 734px;
+}
+
+
+
+.opisTekst {
+    -fx-fill: #2E2E2E;
+    -fx-font-size: 16px;
+    -fx-font-weight: normal;
+    -fx-text-alignment: center;
+}
+
+
+

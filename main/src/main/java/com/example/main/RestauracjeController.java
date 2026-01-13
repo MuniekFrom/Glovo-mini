@@ -8,16 +8,14 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-
-
-
 import java.io.IOException;
+import javafx.scene.input.MouseEvent;
 
 public class RestauracjeController {
     
     
     
-        @FXML
+    @FXML
     private Button Kebab;
 
     @FXML
@@ -29,9 +27,9 @@ public class RestauracjeController {
     @FXML
     private Button Sushi;
 
-   public void wrocDoPoprzedniegoOkna(ActionEvent event) {
+    public void wrocDoPoprzedniegoOkna(ActionEvent event) {
     try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/main/MainController.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/main/GlovoMiniApp.fxml"));
         Parent root = loader.load();
 
         Scene scene = new Scene(root);
@@ -46,6 +44,7 @@ public class RestauracjeController {
         e.printStackTrace();
     }
 }
+
    
     public void przejdzDoSushi(ActionEvent event) {
         try {
@@ -112,6 +111,28 @@ public class RestauracjeController {
 
         } catch (IOException e) {
           e.printStackTrace();
+        }
+    }
+    
+    @FXML
+    private void goToMain(MouseEvent event) {
+        try {
+            Parent root = FXMLLoader.load(
+                    getClass().getResource("/com/example/main/MainController.fxml")
+            );
+
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(
+                    getClass().getResource("/css/style.css").toExternalForm()
+            );
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
     

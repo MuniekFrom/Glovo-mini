@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="825.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.main.MarketController">
+    <children>
+        <Rectangle fill="#9C81DB" height="63.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="600.0" />
+        <ImageView fitHeight="598.0" fitWidth="600.0" layoutY="59.0">
+            <image><Image url="@../../../photos/glovo_mini_kopia.png" /></image>
+        </ImageView>
+
+        <Text layoutX="461.0" layoutY="36.0" text="KONTO" />
+        <Text layoutX="534.0" layoutY="35.0" text="KOSZYK" />
+
+        <Button fx:id="powrotPrzycisk" layoutX="28.0" layoutY="19.0" mnemonicParsing="false" onAction="#powrotDoWyboruSklepow" prefHeight="25.0" prefWidth="76.0" styleClass="powrotButton" text="Powrót" />
+
+        <!-- Produkty -->
+        <Text layoutX="33.0" layoutY="139.0" text="Chleb" wrappingWidth="159.0">
+            <font><Font size="24"/></font>
+        </Text>
+        <Button fx:id="plusChleb" layoutX="288.0" layoutY="116.0" onAction="#plusChleb" text="+" />
+        <Button fx:id="usunChleb" layoutX="368.0" layoutY="116.0" onAction="#usunChleb" text="-" />
+        <Text fx:id="iloscChleb" layoutX="332.0" layoutY="134.0" />
+
+        <Text layoutX="33.0" layoutY="188.0" text="Mleko" wrappingWidth="159.0">
+            <font><Font size="24"/></font>
+        </Text>
+        <Button fx:id="plusMleko" layoutX="288.0" layoutY="165.0" onAction="#plusMleko" text="+" />
+        <Button fx:id="usunMleko" layoutX="368.0" layoutY="165.0" onAction="#usunMleko" text="-" />
+        <Text fx:id="iloscMleko" layoutX="332.0" layoutY="183.0" />
+
+        <Text layoutX="33.0" layoutY="238.0" text="Jajka" wrappingWidth="159.0">
+            <font><Font size="24"/></font>
+        </Text>
+        <Button fx:id="plusJajka" layoutX="288.0" layoutY="215.0" onAction="#plusJajka" text="+" />
+        <Button fx:id="usunJajka" layoutX="368.0" layoutY="215.0" onAction="#usunJajka" text="-" />
+        <Text fx:id="iloscJajka" layoutX="332.0" layoutY="233.0" />
+
+        <Text layoutX="33.0" layoutY="288.0" text="Masło" wrappingWidth="159.0">
+            <font><Font size="24"/></font>
+        </Text>
+        <Button fx:id="plusMaslo" layoutX="288.0" layoutY="266.0" onAction="#plusMaslo" text="+" />
+        <Button fx:id="usunMaslo" layoutX="368.0" layoutY="266.0" onAction="#usunMaslo" text="-" />
+        <Text fx:id="iloscMaslo" layoutX="332.0" layoutY="283.0" />
+
+        <Text layoutX="33.0" layoutY="338.0" text="Ser" wrappingWidth="159.0">
+            <font><Font size="24"/></font>
+        </Text>
+        <Button fx:id="plusSer" layoutX="288.0" layoutY="316.0" onAction="#plusSer" text="+" />
+        <Button fx:id="usunSer" layoutX="368.0" layoutY="316.0" onAction="#usunSer" text="-" />
+        <Text fx:id="iloscSer" layoutX="332.0" layoutY="333.0" />
+
+        <Text layoutX="33.0" layoutY="388.0" text="Jogurt" wrappingWidth="159.0">
+            <font><Font size="24"/></font>
+        </Text>
+        <Button fx:id="plusJogurt" layoutX="288.0" layoutY="366.0" onAction="#plusJogurt" text="+" />
+        <Button fx:id="usunJogurt" layoutX="368.0" layoutY="366.0" onAction="#usunJogurt" text="-" />
+        <Text fx:id="iloscJogurt" layoutX="332.0" layoutY="383.0" />
+
+        <Text layoutX="33.0" layoutY="438.0" text="Sok" wrappingWidth="159.0">
+            <font><Font size="24"/></font>
+        </Text>
+        <Button fx:id="plusSok" layoutX="288.0" layoutY="416.0" onAction="#plusSok" text="+" />
+        <Button fx:id="usunSok" layoutX="368.0" layoutY="416.0" onAction="#usunSok" text="-" />
+        <Text fx:id="iloscSok" layoutX="332.0" layoutY="433.0" />
+
+        <Rectangle height="5" layoutY="650" width="600" />
+
+        <Text layoutX="21.0" layoutY="682.0" text="Produkty:"><font><Font size="18"/></font></Text>
+        <Text fx:id="produktyTextCena" layoutX="113.0" layoutY="683.0"><font><Font size="18"/></font></Text>
+        <Text layoutX="21.0" layoutY="716.0" text="🚚 Dostawa +10 zł"><font><Font size="18"/></font></Text>
+        <Text layoutX="24.0" layoutY="765.0" text="🛒 Razem:"><font><Font size="36"/></font></Text>
+        <Text fx:id="cenaKoncowaSporzywczy" layoutX="200.0" layoutY="766.0"><font><Font size="36"/></font></Text>
+
+        <Button layoutX="416.0" layoutY="764.0" onAction="#zamowienie" prefHeight="25.0" prefWidth="140.0" styleClass="zamowButton" text="Zamów" />
+        <Text fx:id="zamowienieMinimumKwotaText" fill="RED" layoutX="150" layoutY="805" />
+    </children>
+</AnchorPane>
