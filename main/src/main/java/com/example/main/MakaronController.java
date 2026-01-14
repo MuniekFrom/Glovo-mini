@@ -1,6 +1,7 @@
 package com.example.main;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.text.Text;
@@ -14,12 +15,6 @@ import javafx.stage.Stage;
 import javafx.animation.PauseTransition;
 import javafx.util.Duration;
 import javafx.scene.control.Alert;
-import javafx.stage.FileChooser;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.io.File;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class MakaronController {
 
@@ -52,21 +47,21 @@ public class MakaronController {
         odswiezWidok();
     }
 
-
+    // ====== PLUSY ======
     @FXML private void plusSpaghetti(ActionEvent e) { spaghetti++; odswiezWidok(); }
     @FXML private void plusCarbonara(ActionEvent e) { carbonara++; odswiezWidok(); }
     @FXML private void plusPenne(ActionEvent e) { penne++; odswiezWidok(); }
     @FXML private void plusPennePesto(ActionEvent e) { pennePesto++; odswiezWidok(); }
 
-
+    // ====== MINUSY ======
     @FXML private void usunSpaghetti(ActionEvent e) { if (spaghetti > 0) spaghetti--; odswiezWidok(); }
     @FXML private void usunCarbonara(ActionEvent e) { if (carbonara > 0) carbonara--; odswiezWidok(); }
     @FXML private void usunPenne(ActionEvent e) { if (penne > 0) penne--; odswiezWidok(); }
     @FXML private void usunPennePesto(ActionEvent e) { if (pennePesto > 0) pennePesto--; odswiezWidok(); }
 
-
     @FXML private void dodatkiZmiana(ActionEvent e) { odswiezWidok(); }
 
+    // ====== POWRÓT ======
     @FXML
     public void powrotDoWyboruRestauracji(ActionEvent event) {
         try {
@@ -89,9 +84,8 @@ public class MakaronController {
         }
     }
 
+    // ====== RACHUNEK ======
     private String zbudujRachunek(LocalDateTime data) {
-        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-
         int suma = spaghetti * CENA_SPAGHETTI
                 + carbonara * CENA_CARBONARA
                 + penne * CENA_PENNE
@@ -109,30 +103,28 @@ public class MakaronController {
 
         StringBuilder sb = new StringBuilder();
         sb.append("========== RACHUNEK - MAKARON MINI ==========\n");
-        sb.append("Data zamówienia: ").append(data.format(fmt)).append("\n");
-        sb.append("------------------------------------------\n");
-        sb.append(String.format("%-15s %5s %8s %10s\n", "Produkt", "Ilość", "Cena", "Wartość"));
+        sb.append("Data zamówienia: ").append(data).append("\n");
         sb.append("------------------------------------------\n");
 
-        if (spaghetti > 0) sb.append(String.format("%-15s %5d %8d %10d\n", "Spaghetti", spaghetti, CENA_SPAGHETTI, spaghetti * CENA_SPAGHETTI));
-        if (carbonara > 0) sb.append(String.format("%-15s %5d %8d %10d\n", "Carbonara", carbonara, CENA_CARBONARA, carbonara * CENA_CARBONARA));
-        if (penne > 0) sb.append(String.format("%-15s %5d %8d %10d\n", "Penne", penne, CENA_PENNE, penne * CENA_PENNE));
-        if (pennePesto > 0) sb.append(String.format("%-15s %5d %8d %10d\n", "Penne Pesto", pennePesto, CENA_PENNE_PESTO, pennePesto * CENA_PENNE_PESTO));
+        if (spaghetti > 0) sb.append("Spaghetti x").append(spaghetti).append("\n");
+        if (carbonara > 0) sb.append("Carbonara x").append(carbonara).append("\n");
+        if (penne > 0) sb.append("Penne x").append(penne).append("\n");
+        if (pennePesto > 0) sb.append("Penne Pesto x").append(pennePesto).append("\n");
 
-        sb.append("------------------------------------------\n");
         if (dodatki > 0) {
             sb.append("Dodatki:\n").append(dodatkiLista);
-            sb.append("------------------------------------------\n");
         }
 
-        sb.append(String.format("Jedzenie: %d zł\n", jedzenie));
-        sb.append(String.format("Dostawa:  %d zł\n", dostawa));
-        sb.append(String.format("RAZEM:    %d zł\n", razem));
+        sb.append("------------------------------------------\n");
+        sb.append("Jedzenie: ").append(jedzenie).append(" zł\n");
+        sb.append("Dostawa: ").append(dostawa).append(" zł\n");
+        sb.append("RAZEM: ").append(razem).append(" zł\n");
         sb.append("==========================================\n");
 
         return sb.toString();
     }
 
+    // ====== ZAMÓW (przejście do Checkout) ======
     @FXML
     private void zamowienieJedzenia(ActionEvent event) {
         if (razemDoZaplaty < MIN_ZAMOWIENIA) {
@@ -143,55 +135,43 @@ public class MakaronController {
             return;
         }
 
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Zamówienie");
-        alert.setHeaderText("Zamówiono jedzenie ✅");
-        alert.setContentText("Zapiszę rachunek do pliku.");
-        alert.showAndWait();
-
-        LocalDateTime data = LocalDateTime.now();
-        String rachunek = zbudujRachunek(data);
-
-        FileChooser fc = new FileChooser();
-        fc.setTitle("Zapisz rachunek");
-        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Plik tekstowy (*.txt)", "*.txt"));
-        fc.setInitialFileName("rachunek_" + data.format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")) + ".txt");
-
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        File file = fc.showSaveDialog(stage);
-        
-        if (file == null) return;
-
         try {
-            Files.writeString(file.toPath(), rachunek, StandardCharsets.UTF_8);
-            Alert done = new Alert(Alert.AlertType.INFORMATION);
-            done.setTitle("Rachunek");
-            done.setHeaderText("Rachunek zapisany ✅");
-            done.setContentText("Zapisano plik:\n" + file.getAbsolutePath());
-            done.showAndWait();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/main/Checkout.fxml"));
+            Parent root = loader.load();
+
+            CheckoutController checkoutController = loader.getController();
+            checkoutController.ustawZawartoscKoszyka(zbudujRachunek(LocalDateTime.now()));
+
+            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+
             wyczyscKoszyk();
-        } catch (Exception e) {
+
+        } catch (IOException e) {
             e.printStackTrace();
-            Alert err = new Alert(Alert.AlertType.ERROR);
-            err.setTitle("Błąd");
-            err.setHeaderText("Nie udało się zapisać rachunku");
-            err.setContentText(e.getMessage());
-            err.showAndWait();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Błąd");
+            alert.setHeaderText("Nie udało się przejść do Checkout");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
         }
     }
 
-
     private void wyczyscKoszyk() {
-        spaghetti = 0; 
-        carbonara = 0; 
-        penne = 0; 
+        spaghetti = 0;
+        carbonara = 0;
+        penne = 0;
         pennePesto = 0;
         checkBoxSer.setSelected(false);
         checkBoxOliwa.setSelected(false);
         zamowienieMinimumKwotaText.setText("");
         odswiezWidok();
     }
-    
+
     private void odswiezWidok() {
         iloscSpaghetti.setText(String.valueOf(spaghetti));
         iloscCarbonara.setText(String.valueOf(carbonara));

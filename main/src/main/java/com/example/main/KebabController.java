@@ -197,50 +197,46 @@ public class KebabController {
     }
 
     @FXML
-    private void zamowienieJedzenia(ActionEvent event) {
-        if (razemDoZaplaty < MIN_ZAMOWIENIA) {
-            zamowienieMinimumKwotaText.setText("Minimalna wartość zamówienia: 30 zł");
-            PauseTransition pause = new PauseTransition(Duration.seconds(5));
-            pause.setOnFinished(e -> zamowienieMinimumKwotaText.setText(""));
-            pause.play();
-            return;
-        }
-
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Zamówienie");
-        alert.setHeaderText("Zamówiono jedzenie ✅");
-        alert.setContentText("Zapiszę rachunek do pliku.");
-        alert.showAndWait();
-
-        LocalDateTime data = LocalDateTime.now();
-        String rachunek = zbudujRachunek(data);
-
-        FileChooser fc = new FileChooser();
-        fc.setTitle("Zapisz rachunek");
-        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Plik tekstowy (*.txt)", "*.txt"));
-        fc.setInitialFileName("rachunek_" + data.format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")) + ".txt");
-
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        File file = fc.showSaveDialog(stage);
-        if (file == null) return;
-
-        try {
-            Files.writeString(file.toPath(), rachunek, StandardCharsets.UTF_8);
-            Alert done = new Alert(Alert.AlertType.INFORMATION);
-            done.setTitle("Rachunek");
-            done.setHeaderText("Rachunek zapisany ✅");
-            done.setContentText("Zapisano plik:\n" + file.getAbsolutePath());
-            done.showAndWait();
-            wyczyscKoszyk();
-        } catch (Exception e) {
-            e.printStackTrace();
-            Alert err = new Alert(Alert.AlertType.ERROR);
-            err.setTitle("Błąd");
-            err.setHeaderText("Nie udało się zapisać rachunku");
-            err.setContentText(e.getMessage());
-            err.showAndWait();
-        }
+private void zamowienieJedzenia(ActionEvent event) {
+    if (razemDoZaplaty < MIN_ZAMOWIENIA) {
+        zamowienieMinimumKwotaText.setText("Minimalna wartość zamówienia: 30 zł");
+        PauseTransition pause = new PauseTransition(Duration.seconds(5));
+        pause.setOnFinished(e -> zamowienieMinimumKwotaText.setText(""));
+        pause.play();
+        return;
     }
+
+    try {
+        // Tworzymy loader
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/main/Checkout.fxml"));
+        Parent root = loader.load();
+
+        // Pobieramy kontroler Checkout
+        CheckoutController checkoutController = loader.getController();
+
+        // Tworzymy rachunek i ustawiamy w Checkout
+        checkoutController.ustawZawartoscKoszyka(zbudujRachunek(LocalDateTime.now()));
+
+        // Ustawiamy scenę
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
+
+        // Opcjonalnie czyścimy koszyk
+        wyczyscKoszyk();
+
+    } catch (IOException e) {
+        e.printStackTrace();
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Błąd");
+        alert.setHeaderText("Nie udało się przejść do Checkout");
+        alert.setContentText(e.getMessage());
+        alert.showAndWait();
+    }
+}
 
     private void wyczyscKoszyk() {
         rollo = pita = box = wrap = 0;

@@ -34,7 +34,6 @@ public class AptekaController {
     private static final int CENA_WODA_UTLENIONA = 7;
 
     private static final int DOSTAWA = 10;
-    private static final int MIN_ZAMOWIENIA = 30;
 
     private int sumaProduktow = 0;
     private int razemDoZaplaty = 0;
@@ -101,18 +100,11 @@ public class AptekaController {
 
     // ====== ZAMÓW (przejście do Koszyka) ======
     @FXML private void zamowienie(ActionEvent event) {
-        if (razemDoZaplaty < MIN_ZAMOWIENIA) {
-            zamowienieMinimumKwotaText.setText("Minimalna wartość zamówienia: 30 zł");
-            PauseTransition pause = new PauseTransition(Duration.seconds(5));
-            pause.setOnFinished(e -> zamowienieMinimumKwotaText.setText(""));
-            pause.play();
-            return;
-        }
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/main/Koszyk.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/main/Checkout.fxml"));
             Parent root = loader.load();
-            KoszykController kc = loader.getController();
+            CheckoutController kc = loader.getController();
             kc.ustawZawartoscKoszyka(zbudujRachunek(LocalDateTime.now()));
 
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();

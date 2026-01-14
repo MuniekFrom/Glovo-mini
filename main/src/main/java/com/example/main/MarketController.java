@@ -122,52 +122,29 @@ public class MarketController {
         return sb.toString();
     }
 
-    // ====== ZAMÓW ======
-    @FXML
-    private void zamowienie(ActionEvent event) {
-        if(razemDoZaplaty<MIN_ZAMOWIENIA){
-            zamowienieMinimumKwotaText.setText("Minimalna wartość zamówienia: "+MIN_ZAMOWIENIA+" zł");
+    // ====== ZAMÓW (przejście do Kasy) ======
+    @FXML private void zamowienie(ActionEvent event) {
+        if (razemDoZaplaty < MIN_ZAMOWIENIA) {
+            zamowienieMinimumKwotaText.setText("Minimalna wartość zamówienia: 30 zł");
             PauseTransition pause = new PauseTransition(Duration.seconds(5));
-            pause.setOnFinished(e->zamowienieMinimumKwotaText.setText(""));
+            pause.setOnFinished(e -> zamowienieMinimumKwotaText.setText(""));
             pause.play();
             return;
         }
 
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Zamówienie");
-        alert.setHeaderText("Zamówiono produkty ✅");
-        alert.setContentText("Zapiszę rachunek do pliku.");
-        alert.showAndWait();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/main/Checkout.fxml"));
+            Parent root = loader.load();
+            CheckoutController kc = loader.getController();
+            kc.ustawZawartoscKoszyka(zbudujRachunek(LocalDateTime.now()));
 
-        LocalDateTime data = LocalDateTime.now();
-        String rachunek = zbudujRachunek(data);
+            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
 
-        FileChooser fc = new FileChooser();
-        fc.setTitle("Zapisz rachunek");
-        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Plik tekstowy (*.txt)","*.txt"));
-        fc.setInitialFileName("rachunek_"+data.format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"))+".txt");
-
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        File file = fc.showSaveDialog(stage);
-
-        if(file==null) return;
-
-        try{
-            Files.writeString(file.toPath(), rachunek, StandardCharsets.UTF_8);
-            Alert done = new Alert(Alert.AlertType.INFORMATION);
-            done.setTitle("Rachunek");
-            done.setHeaderText("Rachunek zapisany ✅");
-            done.setContentText("Zapisano plik:\n"+file.getAbsolutePath());
-            done.showAndWait();
             wyczyscKoszyk();
-        }catch(Exception e){
-            e.printStackTrace();
-            Alert err = new Alert(Alert.AlertType.ERROR);
-            err.setTitle("Błąd");
-            err.setHeaderText("Nie udało się zapisać rachunku");
-            err.setContentText(e.getMessage());
-            err.showAndWait();
-        }
+
+        } catch(IOException e) { e.printStackTrace(); }
     }
 
     private void wyczyscKoszyk(){

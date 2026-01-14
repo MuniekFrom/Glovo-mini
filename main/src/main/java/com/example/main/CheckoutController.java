@@ -20,10 +20,10 @@ import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class KoszykController {
+public class CheckoutController {
 
     @FXML private TextArea koszykRachunekText;
-    @FXML private TextField krajTextField, miastoTextField;
+    @FXML private TextField miastoTextField;
     @FXML private TextField ulicaTextField, numerTextField, kodTextField;
     @FXML private ComboBox<String> platnoscComboBox;
     @FXML private Button powrotPrzycisk, zapiszPlikPrzycisk;
@@ -41,13 +41,22 @@ public class KoszykController {
         platnoscComboBox.getItems().addAll("Gotówka", "Karta", "Blik");
         platnoscComboBox.getSelectionModel().selectFirst();
 
-        // Filtracja kodu pocztowego - tylko cyfry
+        // Prompt text pokazujący format kodu pocztowego
+        kodTextField.setPromptText("XX-XXX");
+
+        // Filtracja kodu pocztowego - tylko cyfry i jeden znak '-'
         kodTextField.textProperty().addListener((obs, oldText, newText) -> {
-            if (!newText.matches("\\d*")) {
-                kodTextField.setText(newText.replaceAll("[^\\d]", ""));
+            String filtered = newText.replaceAll("[^\\d-]", "");
+
+            if (filtered.length() > 6) filtered = filtered.substring(0, 6);
+
+            if (filtered.length() >= 2 && !filtered.contains("-")) {
+                filtered = filtered.substring(0, 2) + "-" + filtered.substring(2);
             }
+
+            kodTextField.setText(filtered);
         });
-    }
+}
 
     @FXML
     public void powrotDoSklepow(ActionEvent event) {
@@ -69,7 +78,7 @@ public class KoszykController {
     @FXML
     public void zapiszKoszykDoPliku() {
         // Walidacja pól adresu
-        if (krajTextField.getText().isEmpty() || miastoTextField.getText().isEmpty()
+        if (miastoTextField.getText().isEmpty()
                 || ulicaTextField.getText().isEmpty() || numerTextField.getText().isEmpty()
                 || kodTextField.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -92,7 +101,7 @@ public class KoszykController {
         String pelnyRachunek = new StringBuilder()
                 .append(zawartoscKoszyka).append("\n")
                 .append("Adres dostawy:\n")
-                .append("Kraj: ").append(krajTextField.getText()).append("\n")
+                .append("Kraj: Polska").append("\n")
                 .append("Miasto: ").append(miastoTextField.getText()).append("\n")
                 .append("Ulica: ").append(ulicaTextField.getText()).append("\n")
                 .append("Nr domu: ").append(numerTextField.getText()).append("\n")
@@ -119,13 +128,20 @@ public class KoszykController {
 
             // Opcjonalnie: wyczyść pola po zapisie
             koszykRachunekText.clear();
-            krajTextField.clear();
             miastoTextField.clear();
             ulicaTextField.clear();
             numerTextField.clear();
             kodTextField.clear();
             platnoscComboBox.getSelectionModel().selectFirst();
             zawartoscKoszyka = "";
+            
+            //Przejście do Końca zamówienia
+            Parent root = FXMLLoader.load(
+                getClass().getResource("/com/example/main/Zamowiono.fxml")
+            );
+            Stage st = (Stage) powrotPrzycisk.getScene().getWindow();
+            st.setScene(new Scene(root));
+            st.show();
 
         } catch (Exception e) {
             e.printStackTrace();
