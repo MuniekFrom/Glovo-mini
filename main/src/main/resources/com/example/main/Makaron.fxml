@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="825.0" prefWidth="580.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.main.MakaronController">
+    <children>
+        <fx:include source="TopBar.fxml" />
+      <ImageView fitHeight="598.0" fitWidth="600.0" layoutY="57.0">
+         <image>
+            <Image url="@../../../photos/glovo_mini_kopia.png" />
+         </image>
+      </ImageView>
+        <Button fx:id="powrotPrzycisk" layoutX="20.0" layoutY="72.0" mnemonicParsing="false" onAction="#powrotDoWyboruRestauracji" prefHeight="25.0" prefWidth="76.0" styleClass="powrotButton" text="Powrót" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="72.0" />
+        <Text layoutX="199.0" layoutY="146.0" text="Spaghetti Bolognese" wrappingWidth="113.68359374999994">
+            <font><Font size="24" /></font>
+        </Text>
+        <ImageView fitHeight="148.0" fitWidth="146.0" layoutX="40.0" layoutY="84.0">
+            <image><Image url="@../../../photos/spagbolognese.png" /></image>
+        </ImageView>
+        <Button fx:id="plusSpaghetti" layoutX="330.0" layoutY="129.0" onAction="#plusSpaghetti" text="+" />
+        <Button fx:id="usunSpaghetti" layoutX="381.0" layoutY="171.0" onAction="#usunSpaghetti" prefHeight="26.0" prefWidth="25.0" text="-" />
+        <Text fx:id="iloscSpaghetti" layoutX="388.0" layoutY="146.0" wrappingWidth="24.799999999999955">
+            <font>
+                <Font size="18" />
+            </font>
+        </Text>
+
+        <Text layoutX="199.0" layoutY="245.0" text="Spaghetti Carbonara" wrappingWidth="113.68359374999994">
+            <font><Font size="24" /></font>
+        </Text>
+        <ImageView fitHeight="117.0" fitWidth="169.0" layoutX="28.0" layoutY="195.0" preserveRatio="true">
+            <image><Image url="@../../../photos/spagcarbonara.png" /></image>
+        </ImageView>
+        <Button fx:id="plusCarbonara" layoutX="330.0" layoutY="228.0" onAction="#plusCarbonara" text="+" />
+        <Button fx:id="usunCarbonara" layoutX="381.0" layoutY="268.0" onAction="#usunCarbonara" prefHeight="26.0" prefWidth="26.0" text="-" />
+        <Text fx:id="iloscCarbonara" layoutX="388.0" layoutY="245.0" wrappingWidth="24.799999999999955">
+            <font>
+                <Font size="18" />
+            </font>
+        </Text>
+
+        <Text layoutX="199.0" layoutY="344.0" text="Penne Arrabiata" wrappingWidth="102.7366943359375">
+            <font><Font size="24" /></font>
+        </Text>
+        <ImageView fitHeight="162.0" fitWidth="160.0" layoutX="30.0" layoutY="281.0" preserveRatio="true">
+            <image><Image url="@../../../photos/pennearrabiata.png" /></image>
+        </ImageView>
+        <Button fx:id="plusPenne" layoutX="330.0" layoutY="335.0" onAction="#plusPenne" text="+" />
+        <Button fx:id="usunPenne" layoutX="380.0" layoutY="382.0" onAction="#usunPenne" prefHeight="26.0" prefWidth="26.0" text="-" />
+        <Text fx:id="iloscPenne" layoutX="388.0" layoutY="352.0" wrappingWidth="24.799999999999955">
+            <font>
+                <Font size="18" />
+            </font>
+        </Text>
+
+        <Text layoutX="199.0" layoutY="460.0" text="Penne Pesto" wrappingWidth="102.7366943359375">
+            <font><Font size="24" /></font>
+        </Text>
+        <Button fx:id="plusPennePesto" layoutX="330.0" layoutY="451.0" onAction="#plusPennePesto" text="+" />
+        <Button fx:id="usunPennePesto" layoutX="380.0" layoutY="498.0" onAction="#usunPennePesto" prefHeight="26.0" prefWidth="26.0" text="-" />
+        <Text fx:id="iloscPennePesto" layoutX="388.0" layoutY="468.0" wrappingWidth="24.799999999999955">
+            <font>
+                <Font size="18" />
+            </font>
+        </Text>
+
+        <Rectangle height="5" layoutY="650" width="600" />
+
+        <Text layoutX="20" layoutY="690" text="➕ Dodaj do zamówienia">
+            <font><Font size="24" /></font>
+        </Text>
+        <CheckBox fx:id="checkBoxSer" layoutX="20" layoutY="720" onAction="#dodatkiZmiana" text="Ser (+4 zł)">
+         <font><Font size="18.0" />
+         </font></CheckBox>
+        <CheckBox fx:id="checkBoxOliwa" layoutX="20" layoutY="750" onAction="#dodatkiZmiana" text="Oliwa (+3 zł)">
+         <font><Font size="18.0" />
+         </font></CheckBox>
+
+        <Text layoutX="308.0" layoutY="684.0" text="🍝 Jedzenie:">
+            <font><Font size="18" /></font>
+        </Text>
+        <Text fx:id="jedzenieTextCena" layoutX="416.0" layoutY="685.0" wrappingWidth="140.0">
+            <font>
+                <Font size="18" />
+            </font>
+        </Text>
+        <Text layoutX="308.0" layoutY="715.0" text="🚚 Dostawa +10 zł">
+            <font><Font size="18" /></font>
+        </Text>
+
+        <Text layoutX="310.0" layoutY="769.0" text="🛒 Razem:">
+            <font><Font size="36" /></font>
+        </Text>
+        <Text fx:id="cenaKoncowaMakaron" layoutX="477.0" layoutY="768.0" wrappingWidth="113.68359375">
+            <font><Font size="36" /></font>
+        </Text>
+
+        <Button layoutX="453.0" layoutY="793.0" onAction="#zamowienieJedzenia" prefHeight="25.0" prefWidth="140.0" styleClass="zamowButton" text="Zamów" AnchorPane.bottomAnchor="7.0" AnchorPane.rightAnchor="9.0" />
+
+        <Text fx:id="zamowienieMinimumKwotaText" fill="RED" layoutX="150" layoutY="805" />
+
+        <Text layoutX="229.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rodzaj">
+            <font><Font size="18.0" /></font>
+        </Text>
+        <Text layoutX="376.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ilość">
+            <font><Font size="18.0" /></font>
+        </Text>
+        <Text layoutX="503.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cena">
+            <font><Font size="18.0" /></font>
+        </Text>
+        <Text layoutX="501.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="32zł">
+            <font><Font size="24.0" /></font>
+        </Text>
+        <Text layoutX="501.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="34zł">
+            <font><Font size="24.0" /></font>
+        </Text>
+        <Text layoutX="501.0" layoutY="361.0" strokeType="OUTSIDE" strokeWidth="0.0" text="30zł">
+            <font><Font size="24.0" /></font>
+        </Text>
+        <Text layoutX="501.0" layoutY="477.0" strokeType="OUTSIDE" strokeWidth="0.0" text="33zł">
+            <font><Font size="24.0" /></font>
+        </Text>
+        <ImageView fitHeight="173.0" fitWidth="164.0" layoutX="28.0" layoutY="369.0">
+            <image>
+                <Image url="@../../../photos/pennepesto.png" />
+            </image>
+        </ImageView>
+    </children>
+</AnchorPane>
