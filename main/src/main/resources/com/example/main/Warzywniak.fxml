@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="825.0" prefWidth="580.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.main.WarzywniakController">
+    <children>
+        <fx:include source="TopBar.fxml" />
+        <ImageView fitHeight="598.0" fitWidth="600.0" layoutY="59.0">
+            <image><Image url="@../../../photos/glovo_mini_kopia.png" /></image>
+        </ImageView>
+
+        <Button fx:id="powrotPrzycisk" layoutX="21.0" layoutY="72.0" mnemonicParsing="false" onAction="#powrotDoWyboruSklepow" prefHeight="25.0" prefWidth="76.0" styleClass="powrotButton" text="Powrót" AnchorPane.leftAnchor="90.0" AnchorPane.topAnchor="12.0" />
+
+        <!-- Produkty -->
+        <Text layoutX="33.0" layoutY="139.0" text="Pomidor" wrappingWidth="159.0">
+            <font><Font size="24" /></font>
+        </Text>
+        <Button fx:id="plusPomidor" layoutX="288.0" layoutY="116.0" onAction="#plusPomidor" text="+" />
+        <Button fx:id="usunPomidor" layoutX="368.0" layoutY="116.0" onAction="#usunPomidor" text="-" />
+        <Text fx:id="iloscPomidor" layoutX="332.0" layoutY="134.0" />
+
+        <Text layoutX="33.0" layoutY="188.0" text="Ogórek" wrappingWidth="159.0">
+            <font><Font size="24" /></font>
+        </Text>
+        <Button fx:id="plusOgorek" layoutX="288.0" layoutY="165.0" onAction="#plusOgorek" text="+" />
+        <Button fx:id="usunOgorek" layoutX="368.0" layoutY="165.0" onAction="#usunOgorek" text="-" />
+        <Text fx:id="iloscOgorek" layoutX="332.0" layoutY="183.0" />
+
+        <Text layoutX="33.0" layoutY="238.0" text="Marchew" wrappingWidth="159.0">
+            <font><Font size="24" /></font>
+        </Text>
+        <Button fx:id="plusMarchew" layoutX="288.0" layoutY="215.0" onAction="#plusMarchew" text="+" />
+        <Button fx:id="usunMarchew" layoutX="368.0" layoutY="215.0" onAction="#usunMarchew" text="-" />
+        <Text fx:id="iloscMarchew" layoutX="332.0" layoutY="233.0" />
+
+        <Text layoutX="33.0" layoutY="288.0" text="Papryka" wrappingWidth="159.0">
+            <font><Font size="24" /></font>
+        </Text>
+        <Button fx:id="plusPapryka" layoutX="288.0" layoutY="266.0" onAction="#plusPapryka" text="+" />
+        <Button fx:id="usunPapryka" layoutX="368.0" layoutY="266.0" onAction="#usunPapryka" text="-" />
+        <Text fx:id="iloscPapryka" layoutX="332.0" layoutY="283.0" />
+
+        <Text layoutX="33.0" layoutY="338.0" text="Sałata" wrappingWidth="159.0">
+            <font><Font size="24" /></font>
+        </Text>
+        <Button fx:id="plusSalata" layoutX="288.0" layoutY="316.0" onAction="#plusSalata" text="+" />
+        <Button fx:id="usunSalata" layoutX="368.0" layoutY="316.0" onAction="#usunSalata" text="-" />
+        <Text fx:id="iloscSalata" layoutX="332.0" layoutY="333.0" />
+
+        <Text layoutX="33.0" layoutY="388.0" text="Ziemniaki" wrappingWidth="159.0">
+            <font><Font size="24" /></font>
+        </Text>
+        <Button fx:id="plusZiemniaki" layoutX="288.0" layoutY="366.0" onAction="#plusZiemniaki" text="+" />
+        <Button fx:id="usunZiemniaki" layoutX="368.0" layoutY="366.0" onAction="#usunZiemniaki" text="-" />
+        <Text fx:id="iloscZiemniaki" layoutX="332.0" layoutY="383.0" />
+
+        <Text layoutX="33.0" layoutY="438.0" text="Cebula" wrappingWidth="159.0">
+            <font><Font size="24" /></font>
+        </Text>
+        <Button fx:id="plusCebula" layoutX="288.0" layoutY="416.0" onAction="#plusCebula" text="+" />
+        <Button fx:id="usunCebula" layoutX="368.0" layoutY="416.0" onAction="#usunCebula" text="-" />
+        <Text fx:id="iloscCebula" layoutX="332.0" layoutY="433.0" />
+
+        <Rectangle height="5" layoutY="650" width="600" />
+
+        <Text layoutX="21.0" layoutY="682.0" text="Produkty:"><font><Font size="18" /></font></Text>
+        <Text fx:id="produktyTextCena" layoutX="113.0" layoutY="683.0"><font><Font size="18" /></font></Text>
+        <Text layoutX="21.0" layoutY="716.0" text="🚚 Dostawa +10 zł"><font><Font size="18" /></font></Text>
+        <Text layoutX="24.0" layoutY="765.0" text="🛒 Razem:"><font><Font size="36" /></font></Text>
+        <Text fx:id="cenaKoncowaWarzywniak" layoutX="200.0" layoutY="766.0"><font><Font size="36" /></font></Text>
+
+        <Button layoutX="416.0" layoutY="764.0" onAction="#zamowienie" prefHeight="25.0" prefWidth="140.0" styleClass="zamowButton" text="Zamów" />
+        <Text fx:id="zamowienieMinimumKwotaText" fill="RED" layoutX="150" layoutY="805" />
+    </children>
+</AnchorPane>
