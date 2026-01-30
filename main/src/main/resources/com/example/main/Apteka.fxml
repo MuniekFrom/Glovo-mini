@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="825.0" prefWidth="580.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.main.AptekaController">
+    <children>
+        <fx:include source="TopBar.fxml" />
+        <ImageView fitHeight="598.0" fitWidth="600.0" layoutY="59.0">
+            <image><Image url="@../../../photos/glovo_mini_kopia.png" /></image>
+        </ImageView>
+        <Button fx:id="powrotPrzycisk" layoutX="21.0" layoutY="72.0" mnemonicParsing="false" onAction="#powrotDoWyboruSklepow" prefHeight="25.0" prefWidth="76.0" styleClass="powrotButton" text="Powrót" AnchorPane.leftAnchor="90.0" AnchorPane.topAnchor="12.0" />
+
+
+        <Text layoutX="33.0" layoutY="139.0" text="Aspiryna" wrappingWidth="159.626953125"><font><Font size="24" /></font></Text>
+        <Button fx:id="plusAspiryna" layoutX="288.0" layoutY="116.0" onAction="#plusAspiryna" text="+" />
+        <Button fx:id="usunAspiryna" layoutX="368.0" layoutY="116.0" onAction="#usunAspiryna" prefHeight="26.0" prefWidth="25.0" text="-" />
+        <Text fx:id="iloscAspiryna" layoutX="332.0" layoutY="134.0" wrappingWidth="20.799999999999955" />
+
+        <Text layoutX="33.0" layoutY="188.0" text="Paracetamol" wrappingWidth="159.626953125"><font><Font size="24" /></font></Text>
+        <Button fx:id="plusParacetamol" layoutX="288.0" layoutY="165.0" onAction="#plusParacetamol" text="+" />
+        <Button fx:id="usunParacetamol" layoutX="366.0" layoutY="165.0" onAction="#usunParacetamol" prefHeight="26.0" prefWidth="26.0" text="-" />
+        <Text fx:id="iloscParacetamol" layoutX="332.0" layoutY="183.0" wrappingWidth="20.799999999999955" />
+
+        <Text layoutX="33.0" layoutY="238.0" text="Ibuprofen" wrappingWidth="159.626953125"><font><Font size="24" /></font></Text>
+        <Button fx:id="plusIbuprofen" layoutX="288.0" layoutY="215.0" onAction="#plusIbuprofen" text="+" />
+        <Button fx:id="usunIbuprofen" layoutX="366.0" layoutY="215.0" onAction="#usunIbuprofen" prefHeight="26.0" prefWidth="26.0" text="-" />
+        <Text fx:id="iloscIbuprofen" layoutX="332.0" layoutY="233.0" wrappingWidth="20.799999999999955" />
+
+        <Text layoutX="33.0" layoutY="288.0" text="Witamina C" wrappingWidth="159.626953125"><font><Font size="24" /></font></Text>
+        <Button fx:id="plusWitaminaC" layoutX="288.0" layoutY="266.0" onAction="#plusWitaminaC" text="+" />
+        <Button fx:id="usunWitaminaC" layoutX="366.0" layoutY="266.0" onAction="#usunWitaminaC" prefHeight="26.0" prefWidth="26.0" text="-" />
+        <Text fx:id="iloscWitaminaC" layoutX="332.0" layoutY="283.0" wrappingWidth="20.799999999999955" />
+
+        <Text layoutX="33.0" layoutY="338.0" text="Gripex" wrappingWidth="159.626953125"><font><Font size="24" /></font></Text>
+        <Button fx:id="plusGripex" layoutX="288.0" layoutY="316.0" onAction="#plusGripex" text="+" />
+        <Button fx:id="usunGripex" layoutX="366.0" layoutY="316.0" onAction="#usunGripex" prefHeight="26.0" prefWidth="26.0" text="-" />
+        <Text fx:id="iloscGripex" layoutX="332.0" layoutY="334.0" wrappingWidth="20.799999999999955" />
+
+        <Text layoutX="33.0" layoutY="386.0" text="Plastry Seniplast" wrappingWidth="179.43829345703125"><font><Font size="24" /></font></Text>
+        <Button fx:id="plusPlastry" layoutX="288.0" layoutY="366.0" onAction="#plusPlastry" text="+" />
+        <Button fx:id="usunPlastry" layoutX="366.0" layoutY="366.0" onAction="#usunPlastry" prefHeight="26.0" prefWidth="26.0" text="-" />
+        <Text fx:id="iloscPlastry" layoutX="332.0" layoutY="384.0" wrappingWidth="20.799999999999955" />
+
+        <Text layoutX="33.0" layoutY="434.0" text="Woda utleniona" wrappingWidth="179.43829345703125"><font><Font size="24" /></font></Text>
+        <Button fx:id="plusWodaUtleniona" layoutX="288.0" layoutY="414.0" onAction="#plusWodaUtleniona" text="+" />
+        <Button fx:id="usunWodaUtleniona" layoutX="366.0" layoutY="414.0" onAction="#usunWodaUtleniona" prefHeight="26.0" prefWidth="26.0" text="-" />
+        <Text fx:id="iloscWodaUtleniona" layoutX="332.0" layoutY="432.0" wrappingWidth="20.799999999999955" />
+
+        <Rectangle height="5" layoutY="650" width="600" />
+        <Text layoutX="21.0" layoutY="682.0" text="Produkty:"><font><Font size="18" /></font></Text>
+        <Text fx:id="produktyTextCena" layoutX="113.0" layoutY="683.0" wrappingWidth="140.0"><font><Font size="18" /></font></Text>
+        <Text layoutX="21.0" layoutY="716.0" text="🚚 Dostawa +10 zł"><font><Font size="18" /></font></Text>
+        <Text layoutX="24.0" layoutY="765.0" text="🛒 Razem:"><font><Font size="36" /></font></Text>
+        <Text fx:id="cenaKoncowaApteka" layoutX="200.0" layoutY="766.0" wrappingWidth="179.43829345703125"><font><Font size="36" /></font></Text>
+        <Button layoutX="416.0" layoutY="764.0" onAction="#zamowienie" prefHeight="25.0" prefWidth="140.0" styleClass="zamowButton" text="Zamów" />
+        <Text fx:id="zamowienieMinimumKwotaText" fill="RED" layoutX="150" layoutY="805" />
+      <ImageView fitHeight="270.0" fitWidth="378.0" layoutX="124.0" layoutY="440.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../photos/apteczka.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="393.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../photos/serce.png" />
+         </image>
+      </ImageView>
+    </children>
+</AnchorPane>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="700.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.main.CheckoutController">
+    <children>
+        <!-- Górny pasek -->
+        <Text layoutX="30.0" layoutY="46.0" text="Checkout">
+            <font><Font size="24" /></font>
+        </Text>
+        <Button fx:id="powrotPrzycisk" layoutX="384.0" layoutY="25.0" mnemonicParsing="false" onAction="#powrotDoSklepow" prefHeight="25.0" prefWidth="80.0" styleClass="powrotZCheckout" text="Powrót" AnchorPane.topAnchor="24.0" />
+
+        <!-- Obszar rachunku -->
+        <TextArea fx:id="koszykRachunekText" editable="false" layoutX="20.0" layoutY="70.0" prefHeight="250.0" prefWidth="460.0" wrapText="true">
+            <font><Font size="16" /></font>
+        </TextArea>
+
+        <!-- Adres dostawy -->
+        <Text layoutX="20.0" layoutY="340.0" text="Adres dostawy:">
+            <font><Font size="18" /></font>
+        </Text>
+
+        <Text layoutX="20.0" layoutY="370.0" text="Dostarczamy tylko na terenie Polski!" />
+
+        <Text layoutX="20.0" layoutY="410.0" text="Miasto:" />
+        <TextField fx:id="miastoTextField" layoutX="100.0" layoutY="390.0" prefWidth="150.0" />
+
+        <Text layoutX="20.0" layoutY="450.0" text="Ulica:" />
+        <TextField fx:id="ulicaTextField" layoutX="100.0" layoutY="430.0" prefWidth="150.0" />
+
+        <Text layoutX="260.0" layoutY="450.0" text="Nr domu:" />
+        <TextField fx:id="numerTextField" layoutX="320.0" layoutY="430.0" prefWidth="80.0" />
+
+        <Text layoutX="20.0" layoutY="490.0" text="Kod pocztowy:" />
+        <TextField fx:id="kodTextField" layoutX="120.0" layoutY="470.0" prefWidth="100.0" />
+
+        <!-- Wybór płatności -->
+        <Text layoutX="20.0" layoutY="530.0" text="Płatność:" />
+        <ComboBox fx:id="platnoscComboBox" layoutX="100.0" layoutY="510.0" prefWidth="150.0" />
+
+        <!-- Przycisk zapisu -->
+        <Button fx:id="zapiszPlikPrzycisk" layoutX="254.0" layoutY="600.0" onAction="#zapiszKoszykDoPliku" prefHeight="30.0" prefWidth="226.0" styleClass="zamowRachunek" text="Zamów i drukuj rachunek" />
+    </children>
+</AnchorPane>
